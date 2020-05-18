@@ -51,9 +51,8 @@ pipeline {
         stage('Blue container - deploy') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
-					sh '''
-						kubectl apply -k ./deploy/blue-controller.json
-					'''
+					sh "aws eks --region us-east-1 update-kubeconfig --name udacity"
+                            		sh 'kubectl apply -f ./deploy/blue-controller.json'
 				}
 			}
 		}
