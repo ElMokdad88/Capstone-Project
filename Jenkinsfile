@@ -4,41 +4,10 @@ pipeline {
         AWS_REGION = 'us-east-1'
         AWS_CREDENTIALS = 'aws'
         DOCKER_HUB_CREDENTIALS = 'dockerhub'
-		CLUSTER_NAME = 'capstone'
+		CLUSTER_NAME = 'udacity'
     }
     stages {
-        stage('Kubernetes cluster') {
-			steps {
-				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
-					sh '''
-
-						if aws cloudformation describe-stacks --stack-name eksctl-${CLUSTER_NAME}-cluster; then
-							echo 'Stack already exists'
-						else
-							echo 'Stack is being created'
-							eksctl create cluster \
-							--name ${CLUSTER_NAME} \
-							--version 1.14 \
-							--nodegroup-name standard-workers \
-							--node-type t2.small \
-							--nodes 2 \
-							--nodes-min 1 \
-							--nodes-max 3 \
-							--node-ami auto \
-							--region us-east-1 \
-							--zones us-west-2a \
-							--zones us-west-2b \
-							--zones us-west-2c \
-
-							which aws
-							aws --version
-							hostname
-						fi
-					'''
-				}
-			}
-		}
-
+ 
         stage('Lint HTML') {
 			steps {
 				sh 'ls deploy/'
@@ -73,7 +42,7 @@ pipeline {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
                         kubectl config get-contexts
-						kubectl config set-context arn:aws:cloudformation:us-east-1:627145977656:cluster/${CLUSTER_NAME}
+						kubectl config set-context arn:aws:eks:us-east-1:627145977656:cluster/${CLUSTER_NAME}
 					'''
 				}
 			}
