@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"blue",
-                  "image":"emajar/udacity_capstone",
+                  "image":"elmokdad/capstone",
                   "ports":[
                      {
                         "name":"http-server",
