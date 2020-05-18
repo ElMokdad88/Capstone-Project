@@ -52,7 +52,7 @@ pipeline {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
-						kubectl apply -f ./deploy/blue-controller.json
+						kubectl apply -k ./deploy/blue-controller.json
 					'''
 				}
 			}
@@ -62,7 +62,7 @@ pipeline {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
-						kubectl apply -f ./deploy/green-controller.json
+						kubectl apply -k ./deploy/green-controller.json
 					'''
 				}
 			}
@@ -72,7 +72,7 @@ pipeline {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
-						kubectl apply -f ./deploy/blue-service.json
+						kubectl apply -k ./deploy/blue-service.json
 					'''
 				}
 			}
@@ -88,7 +88,7 @@ pipeline {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
-						kubectl apply -f ./deploy/green-service.json
+						kubectl apply -k ./deploy/green-service.json
 					'''
 				}
 			}
