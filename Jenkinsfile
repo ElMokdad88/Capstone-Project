@@ -1,10 +1,10 @@
 pipeline {
     agent any
 	environment {
-        AWS_REGION = 'us-west-2'
-        AWS_CREDENTIALS = 'aws-kubernetes'
-        DOCKER_HUB_CREDENTIALS = 'dockerhub_credentials'
-		CLUSTER_NAME = 'EmaJarK8sClusterCapstone'
+        AWS_REGION = 'us-east-1'
+        AWS_CREDENTIALS = 'aws'
+        DOCKER_HUB_CREDENTIALS = 'dockerhub'
+		CLUSTER_NAME = 'capstone'
     }
     stages {
         stage('Kubernetes cluster') {
@@ -25,7 +25,7 @@ pipeline {
 							--nodes-min 1 \
 							--nodes-max 3 \
 							--node-ami auto \
-							--region us-west-2 \
+							--region us-east-1 \
 							--zones us-west-2a \
 							--zones us-west-2b \
 							--zones us-west-2c \
@@ -43,7 +43,7 @@ pipeline {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
-						aws eks --region us-west-2 update-kubeconfig --name ${CLUSTER_NAME}
+						aws eks --region us-east-1 update-kubeconfig --name ${CLUSTER_NAME}
 					'''
 				}
 			}
@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
-						docker build -f deploy/Dockerfile -t emajar/udacity_capstone .
+						docker build -f deploy/Dockerfile -t elmokdad/capstone .
 					'''
 				}
 			}
@@ -72,7 +72,7 @@ pipeline {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
 						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-						docker push emajar/udacity_capstone
+						docker push elmokdad/capstone
 					'''
 				}
 			}
