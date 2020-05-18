@@ -38,7 +38,15 @@ pipeline {
 				}
 			}
 		}
-
+	        stage('Configuration file cluster') {
+			steps {
+				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
+					sh '''
+						aws eks --region us-east-1 update-kubeconfig --name ${CLUSTER_NAME}
+					'''
+				}
+			}
+		}
 
         stage('Lint HTML') {
 			steps {
