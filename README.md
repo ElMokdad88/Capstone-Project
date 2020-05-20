@@ -27,3 +27,5 @@ I had to run the following command in order to give Jenkins the right permission
 sudo usermod -a -G docker jenkins
 sudo service jenkins restart
 ```
+
+I have copied the kubectl file to /var/lib/jenkins/ folder
