@@ -29,3 +29,4 @@ sudo service jenkins restart
 ```
 
 I have copied the kubectl file to /var/lib/jenkins/ folder
+Then the jenkins user is not able to access the kubectl binary, it seems that you installed it in a location that is not global.
