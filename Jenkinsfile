@@ -4,7 +4,7 @@ pipeline {
         AWS_REGION = 'us-east-1'
         AWS_CREDENTIALS = 'aws'
         DOCKER_HUB_CREDENTIALS = 'dockerhub'
-		CLUSTER_NAME = 'test'
+		CLUSTER_NAME = 'udacity'
     }
     stages {
  
@@ -101,19 +101,6 @@ pipeline {
                 }
             }
         }    
-
-		// Optional debugging step used to print information about the cluster
-		// stage('Debug') {
-		// 	steps {
-		// 		withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
-		// 			sh '''
-		// 				kubectl get services
-		// 				kubectl get pods
-		// 				kubectl describe pods
-		// 			'''
-		// 		}
-		// 	}
-		// }
     }
 }
 
