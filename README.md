@@ -29,26 +29,6 @@ sudo service jenkins restart
 ```
 
 I have copied the kubectl file to /var/lib/jenkins/ folder
-Then the jenkins user is not able to access the kubectl binary, it seems that you installed it in a location that is not global.
-
-Make sure the jenkins can access the cluster through kubectl:mv .kube/config to /var/lib/jenkins
-
-Give kubectl root permission
-
 `sudo chown root:root kubectl`
-
-Make the kubectl binary executable
-
 `chmod +x ./kubectl`
-
-Move kubectl to /user/local/bin
-
 `mv ./kubectl/user/local/bin`
-
-Try running the aws eks update-kubeconfig command in a Jenkins step.
-
-Example below.
-
-aws eks --region ap-southeast-2 update-kubeconfig --name capstonecluster
-
-
