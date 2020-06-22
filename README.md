@@ -32,3 +32,6 @@ I have copied the kubectl file to /var/lib/jenkins/ folder
 `sudo chown root:root kubectl`
 `chmod +x ./kubectl`
 `mv ./kubectl/user/local/bin`
+
+
+I had this issue when installing the AWS CLI using apt. The version is too old in the Ubuntu repository. I removed it and used the AWS docs to install version 2. I also needed to add the AWS key to the Jenkins environment variables.
