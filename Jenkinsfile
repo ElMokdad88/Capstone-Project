@@ -37,16 +37,6 @@ pipeline {
 			}
 		}
 	    
-        stage('Set kubectl context') {
-			steps {
-				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
-					sh '''
-				kubectl config get-contexts
-						kubectl config use-context arn:aws:eks:us-east-1:627145977656:cluster/${CLUSTER_NAME}
-					'''
-				}
-			}
-		}
 
         stage('Blue container - deploy') {
 			steps {
