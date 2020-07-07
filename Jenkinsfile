@@ -36,6 +36,15 @@ pipeline {
 				}
 			}
 		}
+		stage('Create conf file cluster') {
+			steps {
+				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
+					sh '''
+						aws eks --region ${AWS_REGION} update-kubeconfig --name ${CLUSTER_NAME}
+					'''
+				}
+			}
+		}
         stage('Set kubectl context') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
