@@ -4,7 +4,7 @@ pipeline {
         AWS_REGION = 'us-east-1'
         AWS_CREDENTIALS = 'aws'
         DOCKER_HUB_CREDENTIALS = 'dockerhub'
-		CLUSTER_NAME = 'udacity'
+		CLUSTER_NAME = 'udacity2'
     }
     stages {
  
