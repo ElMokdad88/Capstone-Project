@@ -1,10 +1,10 @@
 pipeline {
     agent any
 	environment {
-        AWS_REGION = 'us-west-1'
+        AWS_REGION = 'eu-central-1'
         AWS_CREDENTIALS = 'aws'
         DOCKER_HUB_CREDENTIALS = 'dockerhub'
-		CLUSTER_NAME = 'udacity2'
+		CLUSTER_NAME = 'udacity'
     }
     stages {
  
