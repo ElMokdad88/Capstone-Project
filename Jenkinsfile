@@ -15,8 +15,7 @@ pipeline {
 				sh 'tidy -q -e deploy/*.html'
 			}
 		}
-		
-	stage('Docker image - build') {
+	    stage('Docker image - build') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
@@ -24,8 +23,7 @@ pipeline {
 					'''
 				}
 			}
-		}
-
+        }
         stage('Docker image - push') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
@@ -36,7 +34,7 @@ pipeline {
 				}
 			}
 		}
-	stage('Create conf file cluster') {
+	    stage('Create conf file cluster') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
@@ -55,7 +53,6 @@ pipeline {
 				}
 			}
 		}
-
         stage('Blue container - deploy') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
@@ -65,7 +62,6 @@ pipeline {
 				}
 			}
 		}
-
         stage('Green container - deploy') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
@@ -75,7 +71,6 @@ pipeline {
 				}
 			}
 		}
-
         stage('Blue service - deploy') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
@@ -85,13 +80,11 @@ pipeline {
 				}
 			}
 		}
-
         stage('Wait user approve') {
             steps {
                 input "Do you want to switch traffic to green service?"
             }
         }
-
         stage('Green service - deploy') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
@@ -101,10 +94,6 @@ pipeline {
 				}
 			}
 		}
-        }    
+        
     }
 }
-
-
-
-
