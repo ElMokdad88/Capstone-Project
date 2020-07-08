@@ -40,4 +40,4 @@ I have copied the kubectl file to /var/lib/jenkins/ folder
 `mv ./kubectl/user/local/bin`
 
 
-
+After submitting the projeect I deleted my Instances/Cluster to avoid Bills :P
