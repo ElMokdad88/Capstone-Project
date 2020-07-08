@@ -8,7 +8,7 @@ pipeline {
     }
     stages {
  
-        stage('Lint HTML') {
+       stage('Lint HTML') {
 			steps {
 				sh 'ls deploy/'
 				sh 'cat deploy/index.html'
@@ -16,7 +16,7 @@ pipeline {
 			}
 		}
 		
-		stage('Docker image - build') {
+	stage('Docker image - build') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${DOCKER_HUB_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
@@ -36,7 +36,7 @@ pipeline {
 				}
 			}
 		}
-		stage('Create conf file cluster') {
+	stage('Create conf file cluster') {
 			steps {
 				withAWS(region:"${AWS_REGION}", credentials:"${AWS_CREDENTIALS}") {
 					sh '''
@@ -101,9 +101,10 @@ pipeline {
 				}
 			}
 		}
-
-            }
         }    
     }
 }
+
+
+
 
